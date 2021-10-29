@@ -203,9 +203,9 @@ const SideBar = (props) => {
                                                             <div>
                                                                 {sub.icon
                                                                     && (typeof sub.icon === 'string' ? (
-                                                                        <i className={item.icon} />
+                                                                        <i className={sub.icon} />
                                                                     ) : (
-                                                                        <FontAwesomeIcon icon={item.icon} />
+                                                                        <FontAwesomeIcon icon={sub.icon} />
                                                                     ))}
                                                                 <span>{!sub.skipTranslate ? translate(sub.title) : sub.title}</span>
                                                             </div>
