@@ -64,6 +64,7 @@ const ListView = (props) => {
                     })}
                     key={version}
                 >
+                    {!splitPagination && pagination && cloneElement(pagination, controllerProps)}
                     {bulkActionButtons !== false && bulkActionButtons && (
                         <BulkActionsToolbar {...controllerProps}>{bulkActionButtons}</BulkActionsToolbar>
                     )}
@@ -72,7 +73,6 @@ const ListView = (props) => {
                             ...controllerProps,
                             hasBulkActions: bulkActionButtons !== false
                         })}
-                    {!splitPagination && pagination && cloneElement(pagination, controllerProps)}
                 </Content>
                 {aside && cloneElement(aside, controllerProps)}
             </div>
