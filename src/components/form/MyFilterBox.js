@@ -268,8 +268,8 @@ const MyFilterBox = (props) => {
         <MySimpleForm onSubmit={onSubmit} formRef={formFilterRef} className={classNames(className, formStyle.firstField)} toolbar={null}>
             <div className="d-flex flex-wrap w-100">
                 {renderChildren}
-                <div className={buttonClasses || `col align-self-sm-center d-flex flex-column ${hasClear ? 'justify-content-around' : ''} row`}>
-                    <div className="p-2">
+                <div className={buttonClasses || `col align-self-sm-center ${hasClear ? 'justify-content-around' : ''} row`}>
+                    <div className="p-0 d-flex flex-wrap">
                         {customAction}
                         {hasClear ? (
                             <div className="mr-3 pt-0">
@@ -313,7 +313,7 @@ const MyFilterBox = (props) => {
                             ''
                         )}
                     </div>
-                    <div className="p2">
+                    <div className="p-0">
                         {customConfig}
                     </div>
                 </div>
