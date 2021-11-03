@@ -64,6 +64,8 @@ $angle-right: "\f101";
     // border-bottom: 1px solid var(--border-color);
     color: var(--sidebar-header-color);
     background-color: var(--sidebar-background);
+	padding-left: 8px!important;
+	padding-right: 8px!important;
 	// margin-bottom: 4px;
 }
 
