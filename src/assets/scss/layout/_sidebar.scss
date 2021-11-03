@@ -69,9 +69,9 @@ $angle-right: "\f101";
 	// margin-bottom: 4px;
 }
 
-.collapse.sidebar-header{
-	padding-right: 0;
-	padding-left: 0;
+.collapse .sidebar-header{
+	padding-right: 0px!important;
+	padding-left: 0px!important;
 }
 
 .btn-icon-toggle {

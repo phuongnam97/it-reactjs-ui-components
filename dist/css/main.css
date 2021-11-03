@@ -1424,9 +1424,9 @@ ul.dropdown-menu.side-sub-menu-itech li {
   padding-right: 8px !important;
 }
 
-.collapse.sidebar-header {
-  padding-right: 0;
-  padding-left: 0;
+.collapse .sidebar-header {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
 }
 
 .btn-icon-toggle {
