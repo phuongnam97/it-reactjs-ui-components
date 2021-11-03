@@ -17,6 +17,7 @@ import {
     TitlePropType,
     useCheckMinimumRequiredProps
 } from 'react-admin';
+import PaginationLimit from '../pagination/PaginationLimit';
 import { getListControllerProps } from './useListController';
 
 const ListView = (props) => {
@@ -43,10 +44,13 @@ const ListView = (props) => {
     const classes = useStyles(props);
     const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues, labelLimit } = rest;
     const controllerProps = getListControllerProps(rest);
-    const spaceTableStyle = useCallback(() => ({
-        backgroundColor: spaceTableBackground || 'var(--main-background)',
-        margin: '0 15px'
-    }), [spaceTableBackground]);
+    const spaceTableStyle = useCallback(
+        () => ({
+            backgroundColor: spaceTableBackground || 'var(--main-background)',
+            margin: '0 15px'
+        }),
+        [spaceTableBackground]
+    );
 
     const renderList = () => (
         <>
@@ -69,8 +73,8 @@ const ListView = (props) => {
                     {bulkActionButtons !== false && bulkActionButtons && (
                         <BulkActionsToolbar {...controllerProps}>{bulkActionButtons}</BulkActionsToolbar>
                     )}
-                    {children
-                        && cloneElement(Children.only(children), {
+                    {children &&
+                        cloneElement(Children.only(children), {
                             ...controllerProps,
                             hasBulkActions: bulkActionButtons !== false
                         })}
@@ -90,9 +94,7 @@ const ListView = (props) => {
                 {splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })}
                 {shouldRenderEmptyPage ? cloneElement(empty, controllerProps) : renderList()}
                 {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
-                {splitPagination && (<div className="flex-1" style={spaceTableStyle()} />)}
-                {(total === 0) && (<div>{translate(labelLimit)}</div>)}
-                {(total === 0) && (<div>Hello</div>)}
+                {total === 0 && <PaginationLimit />}
             </div>
         </ExporterContext.Provider>
     );
