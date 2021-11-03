@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import * as PropTypes from 'prop-types';
 import React, { Children, cloneElement, useCallback } from 'react';
 import {
+    useTranslate,
     BulkActionsToolbar,
     BulkDeleteButton,
     ComponentPropType,
@@ -38,6 +39,7 @@ const ListView = (props) => {
         ...rest
     } = props;
     useCheckMinimumRequiredProps('List', ['children'], props);
+    const translate = useTranslate();
     const classes = useStyles(props);
     const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues, labelLimit } = rest;
     const controllerProps = getListControllerProps(rest);
@@ -89,7 +91,7 @@ const ListView = (props) => {
                 {shouldRenderEmptyPage ? cloneElement(empty, controllerProps) : renderList()}
                 {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
                 {splitPagination && (<div className="flex-1" style={spaceTableStyle()} />)}
-                {(total === 0) && (<div>{labelLimit}</div>)}
+                {(total === 0) && (<div>{translate(labelLimit)}</div>)}
             </div>
         </ExporterContext.Provider>
     );
@@ -139,7 +141,12 @@ ListView.propTypes = {
     filter: PropTypes.any,
     empty: PropTypes.any,
     splitPagination: PropTypes.bool,
-    spaceTableBackground: PropTypes.string
+    spaceTableBackground: PropTypes.string,
+    labelLimit: PropTypes.string
+};
+
+ListView.defaultProps = {
+    labelLimit: 'ra.navigation.no_results'
 };
 
 const DefaultBulkActionButtons = (props) => <BulkDeleteButton {...props} />;
