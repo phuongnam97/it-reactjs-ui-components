@@ -92,6 +92,7 @@ const ListView = (props) => {
                 {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
                 {splitPagination && (<div className="flex-1" style={spaceTableStyle()} />)}
                 {(total === 0) && (<div>{translate(labelLimit)}</div>)}
+                {(total === 0) && (<div>Hello</div>)}
             </div>
         </ExporterContext.Provider>
     );
