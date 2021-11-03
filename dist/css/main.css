@@ -1421,7 +1421,7 @@ ul.dropdown-menu.side-sub-menu-itech li {
   color: var(--sidebar-header-color);
   background-color: var(--sidebar-background);
   padding-left: 8px !important;
-  padding-right: 8px !important;
+  padding-right: 12px !important;
 }
 
 .collapse .sidebar-header {
