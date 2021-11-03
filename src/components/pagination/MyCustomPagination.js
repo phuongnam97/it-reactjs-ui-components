@@ -20,13 +20,12 @@ const useStyles = (splitPagination) => {
 const sanitizeProps = ({ setPage, setPerPage, perPage, page, total, ...rest }) => rest;
 
 const MyCustomPagination = (props) => {
-    // console.log('custom pagination', props)
     const { children, basePath, createBtn, splitPagination, ...rest } = props;
     const classes = useStyles(splitPagination)();
 
     const childrenWithProps = React.Children.map(children, (child) => React.cloneElement(child, { ...sanitizeProps(rest) }));
     return (
-        <div className={classnames('d-flex flex-nowrap flex-shrink-1 py-1', !splitPagination && 'flex-grow-1')}>
+        <div className={classnames('d-flex flex-nowrap flex-shrink-1', !splitPagination && 'flex-grow-1')}>
             <div className="d-flex flex-column justify-content-around my-auto">
                 {childrenWithProps}
                 {createBtn ? <RedirectCreateButton basePath={basePath} /> : null}

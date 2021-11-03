@@ -39,7 +39,7 @@ const ListView = (props) => {
     } = props;
     useCheckMinimumRequiredProps('List', ['children'], props);
     const classes = useStyles(props);
-    const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues } = rest;
+    const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues, labelLimit } = rest;
     const controllerProps = getListControllerProps(rest);
     const spaceTableStyle = useCallback(() => ({
         backgroundColor: spaceTableBackground || 'var(--main-background)',
@@ -89,6 +89,7 @@ const ListView = (props) => {
                 {shouldRenderEmptyPage ? cloneElement(empty, controllerProps) : renderList()}
                 {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
                 {splitPagination && (<div className="flex-1" style={spaceTableStyle()} />)}
+                {(total === 0) && (<div>{labelLimit}</div>)}
             </div>
         </ExporterContext.Provider>
     );
