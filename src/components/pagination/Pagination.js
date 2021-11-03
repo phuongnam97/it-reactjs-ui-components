@@ -76,7 +76,7 @@ const Pagination = pure((props) => {
                     component="div"
                     labelRowsPerPage={translate(labelPerPage)}
                     labelDisplayedRows={labelDisplayedRows}
-                    rowsPerPageOptions={rowsPerPageOptions}
+                    rowsPerPageOptions={emptyArray}
                     {...sanitizeListRestProps(rest)}
                 />
             )}
