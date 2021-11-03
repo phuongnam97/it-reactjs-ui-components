@@ -69,6 +69,11 @@ $angle-right: "\f101";
 	// margin-bottom: 4px;
 }
 
+.collapse.sidebar-header{
+	padding-right: 0;
+	padding-left: 0;
+}
+
 .btn-icon-toggle {
 	// background: var(--main-color-dark);
 	color: var(--text-color);
