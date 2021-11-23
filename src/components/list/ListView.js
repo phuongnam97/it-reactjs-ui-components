@@ -69,7 +69,8 @@ const ListView = (props) => {
                             ...controllerProps,
                             hasBulkActions: bulkActionButtons !== false
                         })}
-                    {!splitPagination && pagination && cloneElement(pagination, controllerProps)}
+                    {pagination && cloneElement(pagination, controllerProps)}
+                    {/* {!splitPagination && pagination && cloneElement(pagination, controllerProps)} */}
                 </Content>
                 {aside && cloneElement(aside, controllerProps)}
             </div>
@@ -82,10 +83,10 @@ const ListView = (props) => {
         <ExporterContext.Provider value={exporter}>
             <div className={classnames('list-page', 'd-flex flex-column', classes.root, className)} {...sanitizeRestProps(rest)}>
                 <Title title={title} defaultTitle={defaultTitle} />
-                {splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })}
+                {/* {splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })} */}
                 {shouldRenderEmptyPage ? cloneElement(empty, controllerProps) : renderList()}
                 {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
-                {total === 0 && <PaginationLimit />}
+                {/* {total === 0 && <PaginationLimit />} */}
             </div>
         </ExporterContext.Provider>
     );
