@@ -1,9 +1,8 @@
 import { Card, makeStyles } from '@material-ui/core';
 import classnames from 'classnames';
 import * as PropTypes from 'prop-types';
-import React, { Children, cloneElement, useCallback } from 'react';
+import React, { Children, cloneElement } from 'react';
 import {
-    useTranslate,
     BulkActionsToolbar,
     BulkDeleteButton,
     ComponentPropType,
@@ -40,17 +39,9 @@ const ListView = (props) => {
         ...rest
     } = props;
     useCheckMinimumRequiredProps('List', ['children'], props);
-    const translate = useTranslate();
     const classes = useStyles(props);
-    const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues, labelLimit } = rest;
+    const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues } = rest;
     const controllerProps = getListControllerProps(rest);
-    const spaceTableStyle = useCallback(
-        () => ({
-            backgroundColor: spaceTableBackground || 'var(--main-background)',
-            margin: '0 15px'
-        }),
-        [spaceTableBackground]
-    );
 
     const renderList = () => (
         <>
@@ -73,8 +64,8 @@ const ListView = (props) => {
                     {bulkActionButtons !== false && bulkActionButtons && (
                         <BulkActionsToolbar {...controllerProps}>{bulkActionButtons}</BulkActionsToolbar>
                     )}
-                    {children &&
-                        cloneElement(Children.only(children), {
+                    {children
+                        && cloneElement(Children.only(children), {
                             ...controllerProps,
                             hasBulkActions: bulkActionButtons !== false
                         })}
