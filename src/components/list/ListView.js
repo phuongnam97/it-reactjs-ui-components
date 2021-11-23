@@ -1,7 +1,7 @@
 import { Card, makeStyles } from '@material-ui/core';
 import classnames from 'classnames';
 import * as PropTypes from 'prop-types';
-import React, { Children, cloneElement } from 'react';
+import React, { Children, cloneElement, useCallback } from 'react';
 import {
     BulkActionsToolbar,
     BulkDeleteButton,
@@ -42,6 +42,10 @@ const ListView = (props) => {
     const classes = useStyles(props);
     const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues } = rest;
     const controllerProps = getListControllerProps(rest);
+    const spaceTableStyle = useCallback(() => ({
+        backgroundColor: spaceTableBackground || 'var(--table-odd)',
+        margin: '0 15px'
+    }), [spaceTableBackground]);
 
     const renderList = () => (
         <>
@@ -83,8 +87,13 @@ const ListView = (props) => {
         <ExporterContext.Provider value={exporter}>
             <div className={classnames('list-page', 'd-flex flex-column', classes.root, className)} {...sanitizeRestProps(rest)}>
                 <Title title={title} defaultTitle={defaultTitle} />
-                {/* {splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })} */}
                 {shouldRenderEmptyPage ? cloneElement(empty, controllerProps) : renderList()}
+                {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
+                {splitPagination && (<div className="flex-1" style={spaceTableStyle()} />)}
+                {splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })}
+                {/* <Title title={title} defaultTitle={defaultTitle} /> */}
+                {/* {splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })} */}
+                {/* {shouldRenderEmptyPage ? cloneElement(empty, controllerProps) : renderList()} */}
                 {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
                 {/* {total === 0 && <PaginationLimit />} */}
             </div>
