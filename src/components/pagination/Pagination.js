@@ -47,9 +47,9 @@ const Pagination = pure((props) => {
 
     const { loading, perPage, rowsPerPageOptions, total, labelPerPage, labelLimit, ...rest } = props;
 
-    if (!loading && total === 0) {
-        return <PaginationLimit labelLimit={labelLimit} />;
-    }
+    // if (!loading && total === 0) {
+    //     return <></>;
+    // }
 
     return (
         <Responsive
@@ -76,7 +76,7 @@ const Pagination = pure((props) => {
                     component="div"
                     labelRowsPerPage={translate(labelPerPage)}
                     labelDisplayedRows={labelDisplayedRows}
-                    rowsPerPageOptions={rowsPerPageOptions}
+                    rowsPerPageOptions={emptyArray}
                     {...sanitizeListRestProps(rest)}
                 />
             )}

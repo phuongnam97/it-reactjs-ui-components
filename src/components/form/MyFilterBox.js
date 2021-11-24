@@ -92,6 +92,7 @@ const MyFilterBox = (props) => {
         checkTriggerSubmit,
         icon,
         customAction,
+        customConfig,
         submitDelay,
         hasButtonSearch,
         ...rest
@@ -268,48 +269,53 @@ const MyFilterBox = (props) => {
             <div className="d-flex flex-wrap w-100">
                 {renderChildren}
                 <div className={buttonClasses || `col align-self-sm-center ${hasClear ? 'justify-content-around' : ''} row`}>
-                    {customAction}
-                    {hasClear ? (
-                        <div className="mr-3 pt-0">
-                            <Button
-                                variant="itech"
-                                className="btn-itech-primary btn-itech-md"
-                                type="reset"
-                                disabled={loading}
-                                size="sm"
-                                onClick={resetFilter}
-                            >
-                                {icon && (
-                                    <>
-                                        <FontAwesomeIcon icon={faEraser} />
-                                    </>
-                                )}
-                                {translate('button.clear')}
-                            </Button>
-                        </div>
-                    ) : (
-                        ''
-                    )}
-                    {hasButtonSearch ? (
-                        <div className="my-auto">
-                            <Button
-                                variant="itech"
-                                disabled={loading}
-                                size="sm"
-                                onClick={formEnter}
-                                className="btn-itech-primary btn-itech-md float-md-right float-lg-none"
-                            >
-                                {icon && (
-                                    <>
-                                        <FontAwesomeIcon icon={faSearch} />
-                                    </>
-                                )}
-                                {translate('button.search')}
-                            </Button>
-                        </div>
-                    ) : (
-                        ''
-                    )}
+                    <div className="p-0 d-flex flex-wrap">
+                        {customAction}
+                        {hasClear ? (
+                            <div className="mr-3 pt-0">
+                                <Button
+                                    variant="itech"
+                                    className="btn-itech-primary btn-itech-md"
+                                    type="reset"
+                                    disabled={loading}
+                                    size="sm"
+                                    onClick={resetFilter}
+                                >
+                                    {icon && (
+                                        <>
+                                            <FontAwesomeIcon icon={faEraser} />
+                                        </>
+                                    )}
+                                    {translate('button.clear')}
+                                </Button>
+                            </div>
+                        ) : (
+                            ''
+                        )}
+                        {hasButtonSearch ? (
+                            <div className="my-auto">
+                                <Button
+                                    variant="itech"
+                                    disabled={loading}
+                                    size="sm"
+                                    onClick={formEnter}
+                                    className="btn-itech-primary btn-itech-md float-md-right float-lg-none"
+                                >
+                                    {icon && (
+                                        <>
+                                            <FontAwesomeIcon icon={faSearch} />
+                                        </>
+                                    )}
+                                    {translate('button.search')}
+                                </Button>
+                            </div>
+                        ) : (
+                            ''
+                        )}
+                    </div>
+                    <div className="p-0">
+                        {customConfig}
+                    </div>
                 </div>
             </div>
         </MySimpleForm>
@@ -336,6 +342,7 @@ MyFilterBox.propTypes = {
     checkTriggerSubmit: PropTypes.func,
     icon: PropTypes.bool,
     customAction: PropTypes.any,
+    customConfig: PropTypes.any,
     submitDelay: PropTypes.number,
     hasButtonSearch: PropTypes.bool,
     formFilterRef: PropTypes.object
