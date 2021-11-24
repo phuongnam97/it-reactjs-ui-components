@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import * as PropTypes from 'prop-types';
 import React, { Children, cloneElement, useCallback } from 'react';
 import {
-    useTranslate,
     BulkActionsToolbar,
     BulkDeleteButton,
     ComponentPropType,
@@ -37,20 +36,17 @@ const ListView = (props) => {
         empty,
         splitPagination,
         spaceTableBackground,
+        paginationTop,
         ...rest
     } = props;
     useCheckMinimumRequiredProps('List', ['children'], props);
-    const translate = useTranslate();
     const classes = useStyles(props);
-    const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues, labelLimit } = rest;
+    const { defaultTitle, version, total, loaded, loading, hasCreate, filterValues } = rest;
     const controllerProps = getListControllerProps(rest);
-    const spaceTableStyle = useCallback(
-        () => ({
-            backgroundColor: spaceTableBackground || 'var(--main-background)',
-            margin: '0 15px'
-        }),
-        [spaceTableBackground]
-    );
+    const spaceTableStyle = useCallback(() => ({
+        backgroundColor: spaceTableBackground || 'var(--main-background)',
+        margin: '0 15px'
+    }), [spaceTableBackground]);
 
     const renderList = () => (
         <>
@@ -73,8 +69,8 @@ const ListView = (props) => {
                     {bulkActionButtons !== false && bulkActionButtons && (
                         <BulkActionsToolbar {...controllerProps}>{bulkActionButtons}</BulkActionsToolbar>
                     )}
-                    {children &&
-                        cloneElement(Children.only(children), {
+                    {children
+                        && cloneElement(Children.only(children), {
                             ...controllerProps,
                             hasBulkActions: bulkActionButtons !== false
                         })}
@@ -91,10 +87,12 @@ const ListView = (props) => {
         <ExporterContext.Provider value={exporter}>
             <div className={classnames('list-page', 'd-flex flex-column', classes.root, className)} {...sanitizeRestProps(rest)}>
                 <Title title={title} defaultTitle={defaultTitle} />
-                {splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })}
+                {paginationTop && splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })}
                 {shouldRenderEmptyPage ? cloneElement(empty, controllerProps) : renderList()}
-                {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
                 {total === 0 && <PaginationLimit />}
+                {/* vùng trắng giữa bang và pagination khi phần tử của bảng không đủ để full height của bảng */}
+                {!paginationTop && splitPagination && (<div className="flex-1" style={spaceTableStyle()} />)}
+                {!paginationTop && splitPagination && pagination && cloneElement(pagination, { ...controllerProps, splitPagination: true })}
             </div>
         </ExporterContext.Provider>
     );
@@ -145,11 +143,13 @@ ListView.propTypes = {
     empty: PropTypes.any,
     splitPagination: PropTypes.bool,
     spaceTableBackground: PropTypes.string,
-    labelLimit: PropTypes.string
+    labelLimit: PropTypes.string,
+    paginationTop: PropTypes.bool
 };
 
 ListView.defaultProps = {
-    labelLimit: 'ra.navigation.no_results'
+    labelLimit: 'ra.navigation.no_results',
+    paginationTop: false
 };
 
 const DefaultBulkActionButtons = (props) => <BulkDeleteButton {...props} />;
