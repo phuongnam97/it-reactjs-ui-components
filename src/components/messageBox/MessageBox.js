@@ -60,20 +60,22 @@ const MessageBox = (props) => {
         };
     }, [handleRequestClose, notifyType]);
 
-    const ListButton = showAction > 0 && actions.map((action, index) => (
-        <Button
-            key={index}
-            variant="itech"
-            size="sm"
-            className={action.className ? action.className : 'btn-itech-primary mr-2  btn-itech-fixed'}
-            onClick={() => {
-                dispatch(hideNotification());
-                action.callback();
-            }}
-        >
-            {translate(action.label)}
-        </Button>
-    ));
+    const ListButton =
+        showAction > 0 &&
+        actions.map((action, index) => (
+            <Button
+                key={index}
+                variant="itech"
+                size="sm"
+                className={action.className ? action.className : 'btn-itech-primary mr-2  btn-itech-fixed'}
+                onClick={() => {
+                    dispatch(hideNotification());
+                    action.callback();
+                }}
+            >
+                {translate(action.label)}
+            </Button>
+        ));
 
     return notification ? (
         <>
@@ -97,19 +99,21 @@ const MessageBox = (props) => {
                             <p
                                 style={bodyMessageStyle}
                                 dangerouslySetInnerHTML={{
-                                    __html: notification && notification.message && translate(notification.message, notification.messageArgs)
+                                    __html:
+                                        notification && notification.message && translate(notification.message, notification.messageArgs)
                                 }}
                             />
                         </Container>
                     </Modal.Body>
                     <Modal.Footer className={`border-top-0 d-flex ${showAction > 0 ? 'justify-content-between' : ''}`}>
-                        {showAction > 0
-                        && (
-                            <div>
-                                {ListButton}
-                            </div>
-                        )}
-                        <Button size="sm" variant="itech" className="btn-itech-dark btn-itech-fixed" ref={btnCloseRef} onClick={handleRequestClose}>
+                        {showAction > 0 && <div>{ListButton}</div>}
+                        <Button
+                            size="sm"
+                            variant="itech"
+                            className="btn-itech-dark btn-itech-fixed"
+                            ref={btnCloseRef}
+                            onClick={handleRequestClose}
+                        >
                             {translate(showAction ? 'button.no' : 'button.close')}
                         </Button>
                     </Modal.Footer>
@@ -134,7 +138,7 @@ const MessageBox = (props) => {
                         }}
                     />
                     <span className="float-right ml-3" id="closeMsg">
-                        <FontAwesomeIcon icon={faTimesCircle} onClick={handleRequestClose} />
+                        <FontAwesomeIcon icon={['far', 'fa-times-circle']} onClick={handleRequestClose} />
                     </span>
                 </div>
             )}

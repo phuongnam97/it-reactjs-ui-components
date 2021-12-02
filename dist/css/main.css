@@ -1939,7 +1939,7 @@ a {
 
 .al-footer-right i {
   margin: 0 4px;
-  color: #e85656;
+  color: #ed3333;
   font-size: 12px;
 }
 
@@ -1949,7 +1949,7 @@ a {
 }
 
 .al-footer-right a:hover {
-  color: #e85656;
+  color: #ed3333;
 }
 
 .al-share {
@@ -2188,9 +2188,9 @@ h1, h2, h3, h4, h5, h6 {
   --orange-light-1: #f8b06d;
   --white: #fff;
   --info: #2dacd1;
-  --success: #90b900;
+  --success: #248037;
   --warning: #dfb81c;
-  --danger: #e85656;
+  --danger: #ed3333;
   --facebook-color: #3b5998;
   --twitter-color: #55acee;
   --google-color: #dd4b39;
