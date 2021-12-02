@@ -120,14 +120,14 @@ const MessageBox = (props) => {
                 </Modal>
             ) : (
                 <div
-                    className="d-flex flex-row justify-content-center position-fixed shadow modal-content px-2"
+                    className="d-flex flex-row justify-content-center position-fixed shadow modal-content auto-hide-notification px-2"
                     style={{
                         zIndex: 500,
                         width: '300px',
                         minHeight: '40px',
                         right: '5px',
                         top: '5px',
-                        backgroundColor: `${notifyType === NOTIFICATION_TYPE.AUTO_HIDE_INFO ? '' : 'var(--danger)'}`
+                        backgroundColor: `${notifyType === NOTIFICATION_TYPE.AUTO_HIDE_INFO ? 'var(--info)' : 'var(--danger)'}`
                     }}
                 >
                     <p
