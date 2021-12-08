@@ -34,6 +34,7 @@ const SideBar = (props) => {
         children,
         className,
         toggle: ToggleComponent,
+        header: SidebarHeaderComponent,
         toggleBottom,
         config,
         resWidthHideSidebar,
@@ -163,7 +164,7 @@ const SideBar = (props) => {
                                 >
                                     <NavLink
                                         exact={item.exact ? !collapse : false}
-                                        className={classNames('sidebar-list-link', index !== 0 && 'bordered-top')}
+                                        className={classNames('sidebar-list-link')}
                                         to={item.url}
                                         isActive={item.isActive}
                                         activeClassName="selected"
@@ -234,7 +235,8 @@ const SideBar = (props) => {
 
     return (
         <Nav as="aside" className={[className, 'sidebar', 'd-flex', 'flex-column', 'flex-nowrap', collapse ? 'collapse' : '']} ref={ref}>
-            {!toggleBottom && <ToggleComponent collapse={collapse} toggleCollapse={toggleCollapse} showCollapseButton={!toggleBottom} />}
+            <SidebarHeaderComponent collapse={collapse} />
+            {!toggleBottom && <ToggleComponent collapse={collapse} toggleCollapse={toggleCollapse} />}
             {menus}
             {childrenWithProps}
             {toggleBottom && <ToggleComponent collapse={collapse} toggleCollapse={toggleCollapse} showCollapseButton={toggleBottom} />}
@@ -252,6 +254,7 @@ SideBar.propTypes = {
     menuClasses: PropTypes.string,
     menuHeader: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
     toggle: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+    header: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     localStorageCollapse: PropTypes.string,
     localStorageCheckUserClicked: PropTypes.string,
     toggleBottom: PropTypes.bool
