@@ -34,6 +34,7 @@ const SideBar = (props) => {
         children,
         className,
         toggle: ToggleComponent,
+        toggleBottom,
         config,
         resWidthHideSidebar,
         singleExpand,
@@ -233,9 +234,10 @@ const SideBar = (props) => {
 
     return (
         <Nav as="aside" className={[className, 'sidebar', 'd-flex', 'flex-column', 'flex-nowrap', collapse ? 'collapse' : '']} ref={ref}>
-            <ToggleComponent collapse={collapse} toggleCollapse={toggleCollapse} />
+            {!toggleBottom && <ToggleComponent collapse={collapse} toggleCollapse={toggleCollapse} showCollapseButton={!toggleBottom} />}
             {menus}
             {childrenWithProps}
+            {toggleBottom && <ToggleComponent collapse={collapse} toggleCollapse={toggleCollapse} showCollapseButton={toggleBottom} />}
         </Nav>
     );
 };
@@ -251,7 +253,8 @@ SideBar.propTypes = {
     menuHeader: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
     toggle: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     localStorageCollapse: PropTypes.string,
-    localStorageCheckUserClicked: PropTypes.string
+    localStorageCheckUserClicked: PropTypes.string,
+    toggleBottom: PropTypes.bool
 };
 
 SideBar.defaultProps = {

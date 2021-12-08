@@ -56,19 +56,19 @@ const renderField = ({ type, value, choices, translateChoice, translate, childre
 
 const MyField = (props) => {
     const translate = useTranslate();
-    const { record, resource, source, groupClasses, labelClasses, fieldClasses, hideLabel, label, skipTranslateLabel, ...rest } = props;
-    const translatedLabel = !hideLabel && `${label && !skipTranslateLabel ? translate(label) : translate(`resources.${resource}.fields.${source}`)}: `;
+    const { record, resource, source, groupClasses, labelClasses, fieldClasses, hideLabel, label, skipTranslateLabel, alignCenter, ...rest } = props;
+    const translatedLabel = !hideLabel && `${label && !skipTranslateLabel ? translate(label) : translate(`resources.${resource}.fields.${source}`)}`;
     const labelNotTranslate = label;
     const value = get(record, source);
     const fieldId = `field-${source}`;
     return (
-        <div className={classNames('w-100', 'align-items-center', groupClasses)}>
+        <div className={classNames('w-100', alignCenter ? 'align-items-center' : '', groupClasses)}>
             {!hideLabel ? (
                 <label className={labelClasses} htmlFor={fieldId}>
                     {skipTranslateLabel ? labelNotTranslate : translatedLabel}
                 </label>
             ) : null}
-            <div className={classNames('font-8125rem', fieldClasses)} id={fieldId}>
+            <div className={classNames('font-750rem', fieldClasses)} id={fieldId}>
                 {renderField({ value, translate, ...rest })}
             </div>
         </div>
@@ -88,14 +88,16 @@ MyField.propTypes = {
     hideLabel: PropTypes.bool,
     label: PropTypes.any,
     choices: PropTypes.array,
-    skipTranslateLabel: PropTypes.bool
+    skipTranslateLabel: PropTypes.bool,
+    alignCenter: PropTypes.bool
 };
 
 MyField.defaultProps = {
     translateChoice: false,
     hideLabel: false,
     type: FIELD_TEXT,
-    skipTranslateLabel: false
+    skipTranslateLabel: false,
+    alignCenter: true
 };
 
 export default MyField;
