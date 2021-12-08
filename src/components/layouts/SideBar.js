@@ -234,7 +234,7 @@ const SideBar = (props) => {
     const childrenWithProps = React.Children.map(children, (child) => !!child && React.cloneElement(child, { ...rest, collapse }));
 
     return (
-        <Nav as="aside" className={[className, 'sidebar', 'd-flex', 'flex-column', 'flex-nowrap', collapse ? 'collapse' : '']} ref={ref}>
+        <Nav as="aside" className={[className, 'sidebar', 'd-flex', 'flex-column', 'flex-nowrap', 'bordered-right', collapse ? 'collapse' : '']} ref={ref}>
             <SidebarHeaderComponent collapse={collapse} />
             {!toggleBottom && <ToggleComponent collapse={collapse} toggleCollapse={toggleCollapse} />}
             {menus}
